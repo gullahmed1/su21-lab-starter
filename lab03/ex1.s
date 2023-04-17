@@ -1,3 +1,4 @@
+#changes completed
 .data
 .word 2, 4, 6, 8
 n: .word 9
@@ -20,4 +21,4 @@ finish:
     addi a1, t0, 0
     ecall # print integer ecall
     addi a0, x0, 10
-    ecall # terminate ecall
+    ecall # terminate ecall 
