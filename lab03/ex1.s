@@ -1,4 +1,4 @@
-#changes completed
+#exercise 02 completed
 .data
 .word 2, 4, 6, 8
 n: .word 9
