@@ -41,25 +41,30 @@ main:
     addi s0, x0, 0
     la s1, source
     la s2, dest
+     addi t0, x0, 0 #k=0
+    addi s0, x0, 0 #sum=0
+    la s1, source #loading source array address in s1
+    la s2, dest #loading dest array address in s2
 loop:
-    slli s3, t0, 2
-    add t1, s1, s3
-    lw t2, 0(t1)
-    beq t2, x0, exit
+    slli s3, t0, 2 #left shift by 2 to calculate the offset for memory
+    add t1, s1, s3 
+    lw t2, 0(t1) #loading first value
+    beq t2, x0, exit #if source[k]==0
     add a0, x0, t2
     addi sp, sp, -8
     sw t0, 0(sp)
     sw t2, 4(sp)
-    jal fun
+    jal fun #calling fun function
     lw t0, 0(sp)
     lw t2, 4(sp)
     addi sp, sp, 8
-    add t2, x0, a0
+    add t2, x0, a0 #move func return value in t2
     add t3, s2, s3
-    sw t2, 0(t3)
-    add s0, s0, t2
-    addi t0, t0, 1
-    jal x0, loop
+    sw t2, 0(t3) #storing in dest
+    add s0, s0, t2 #calculating the sum
+    addi t0, t0, 1 #k++
+    jal x0, loop 
+
 exit:
     add a0, x0, s0
     # BEGIN EPILOGUE
